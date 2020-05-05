@@ -1,0 +1,31 @@
+{
+  "name": "rifas",
+  "version": "1.0.0",
+  "description": "Theme WP for the project Rifas.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "yarn development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "yarn development -- --watch",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "yarn production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michelmany/rifas.git"
+  },
+  "keywords": [
+    "theme-wordpress"
+  ],
+  "author": "NITDESIGN",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michelmany/rifas/issues"
+  },
+  "homepage": "https://github.com/michelmany/rifas#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "laravel-mix": "^5.0.4"
+  }
+}
