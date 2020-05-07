@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="description" content="{{ site.description }}">
+		<title>{{ site.title }}</title>
+
+		<link rel="shortcut icon" href="{{ theme.path }}/dist/images/favicon.ico" type="image/x-icon"/>
+		<link rel="icon" href="{{ theme.path }}/dist/images/favicon.ico" type="image/x-icon"/>
+		<link rel="apple-touch-icon" href="{{ theme.path }}/dist/images/apple-touch-icon.png"/>
+
+		{{ function('wp_head') }}
+	</head>
+	<body class="{{ body_class }} d-flex flex-column h-100">
+		{% include 'header.twig' %}
+
+		<div id="root">
+			{% block content %}
+				<div class="container">
+					<h3>Sorry, no content</h3>
+				</div>
+			{% endblock %}
+		</div>
+
+		{% include 'footer.twig' %}
+
+		{% block javascripts %}{% endblock %}
+		{{ function('wp_footer') }}
+	</body>
+</html>

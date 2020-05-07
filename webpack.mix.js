@@ -1,17 +1,75 @@
 let mix = require("laravel-mix");
 
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for your application, as well as bundling up your JS files.
- |
- */
+let config = {
+  base_url: "yourlocalurl.local",
+  watchFiles: ["src/*.*", "src/**/*.*", "dist/*.css"],
+};
 
-mix.js("src/app.js", "dist/").sass("src/app.sass", "dist/");
+mix
+  .setPublicPath("dist/")
+  .js("src/twig.js", "dist/")
+  .js("src/js/app.js", "dist/js/")
+  .sass("src/sass/app.sass", "dist/css/")
+
+  .browserSync({
+    proxy: config.base_url,
+    files: config.watchFiles,
+    injectChanges: true,
+  })
+
+  .webpackConfig((webpack) => {
+    return {
+      plugins: [
+        new webpack.ProvidePlugin({
+          $: "jquery",
+          jQuery: "jquery",
+          "window.jQuery": "jquery",
+        }),
+      ],
+      module: {
+        rules: [
+          {
+            test: /\.twig$/,
+            use: [
+              {
+                loader: "file-loader",
+                options: {
+                  context: "src",
+                  name: "[path][name].[ext]",
+                },
+              },
+              { loader: "extract-loader" },
+              {
+                loader: "html-loader",
+                options: {
+                  minimize: false,
+                  interpolate: true,
+                  attrs: ["img:src", "link:href"],
+                },
+              },
+            ],
+          },
+          {
+            test: /\.svg$/,
+            enforce: "pre",
+            use: [
+              {
+                loader: "svgo-loader",
+                options: {
+                  precision: 2,
+                  plugins: [
+                    {
+                      removeViewBox: false,
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    };
+  });
 
 // Full API
 // mix.js(src, output);

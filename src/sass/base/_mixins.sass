@@ -1,0 +1,35 @@
+
+@mixin icon-button-scale-on-hover
+  cursor: pointer
+  &:hover
+    transform: scale(1.1)
+
+@function tracking( $target )
+  @return ($target / 1000) * 1em
+
+@mixin tracking( $target )
+  letter-spacing: tracking( $target )
+
+@mixin position($top, $right: $top, $bottom: $top, $left: $right)
+  top: $top
+  right: $right
+  bottom: $bottom
+  left: $left
+
+@mixin placeholder
+  &::-webkit-input-placeholder
+    @content
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+
+@function calculateEm($size)
+  $remSize: $size/16
+  @return #{$remSize}em
+
+@mixin fontSize($size)
+  font-size: #{$size}px
+  font-size: calculateEm($size)
